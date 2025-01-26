@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Be My Valentine</title>
+  <style>
+    :root {
+      --primary-color: #ff69b4;
+      --secondary-color: #fff5f7;
+      --font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle, var(--primary-color) 50%, var(--secondary-color) 100%);
+      font-family: var(--font-family);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+      color: white;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .options {
+      margin-top: 20px;
+    }
+
+    label {
+      font-size: 1.25rem;
+      margin: 10px;
+      cursor: pointer;
+      display: block;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+      transform: scale(1.5);
+    }
+
+    #message {
+      font-size: 1.25rem;
+      margin-top: 20px;
+      animation: fadeIn 2s forwards;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>❤️ Will You Be My Valentine? ❤️</h1>
+    <div class="options">
+      <label>
+        <input type="checkbox" id="yes-confetti" /> Yes with Confetti 🎉
+      </label>
+      <label>
+        <input type="checkbox" id="yes-rose" /> Yes with Roses 🌹
+      </label>
+    </div>
+    <p id="message" class="hidden">You make my heart flutter! Will you be my Valentine? 🥰</p>
+    <canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999;"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.19/dist/index.min.js"></script>
+  <script>
+    // Handle Confetti Animation
+    document.getElementById('yes-confetti').addEventListener('change', function () {
+      if (this.checked) {
+        const confettiSettings = { target: 'confetti-canvas' };
+        const confetti = new ConfettiGenerator(confettiSettings);
+        confetti.render();
+        document.getElementById('message').textContent = 'Yay! You chose confetti! 🎉';
+        document.getElementById('message').classList.remove('hidden');
+      }
+    });
+
+    // Handle Rose Animation
+    document.getElementById('yes-rose').addEventListener('change', function () {
+      if (this.checked) {
+        const roseAnimation = document.createElement('div');
+        roseAnimation.style.position = 'fixed';
+        roseAnimation.style.top = '50%';
+        roseAnimation.style.left = '50%';
+        roseAnimation.style.transform = 'translate(-50%, -50%)';
+        roseAnimation.style.animation = 'fadeIn 2s';
+        roseAnimation.innerHTML = '<img src="https://i.imgur.com/t7p7XGq.png" alt="Rose" style="width: 150px; height: auto;">';
+        document.body.appendChild(roseAnimation);
+        document.getElementById('message').textContent = 'Aww! You chose roses! 🌹';
+        document.getElementById('message').classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
+
+
